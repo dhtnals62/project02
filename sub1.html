@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>삼다수의 탄생</title>
+    <link href="CSS/style.css" rel="stylesheet" type="text/css">
+    <link href="CSS/animation.css" rel="stylesheet" type="text/css">
+    <link href="">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js//jquery-v1.10.2.min.js" type="text/javascript"></script>
+    <script src="js//jquery-finger-v0.1.0.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+            mobile_menu();
+        });
+
+        function mobile_menu() {
+            /* 변수 선언 */
+            var $menu = null;
+            var $left_gnb = null; // 영역 전체
+            var $depth1_wrap = null;
+            var $depth1 = null;
+            var $depth1_btn = null;
+
+            /* 시작 함수 */
+            function start() {
+                init();
+                init_event();
+            }
+            /* 변수 초기화 함수 */
+            function init() {
+                $menu = $('.m_menu');
+                $left_gnb = $('.left_gnbWrap'); // 영역 전체
+                $depth1_wrap = $('.left_gnb>li');
+                $depth1 = $depth1_wrap.children('ul');
+                $depth1_btn = $depth1_wrap.children('a');
+            }
+            /* 이벤트 함수 */
+            function init_event() {
+
+                /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+                $menu.click(function(event) {
+                    event.preventDefault();
+                    $left_gnb.addClass('on');
+                });
+
+                /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+                $('.close').click(function(event) {
+                    event.preventDefault();
+
+                    $left_gnb.removeClass('on');
+
+                    // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+                    setTimeout(function() {
+                        $depth1_btn.removeClass('on');
+                        $depth1.slideUp();
+                    }, 300)
+                });
+
+                /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+                $depth1_btn.click(function(event) {
+                    event.preventDefault();
+                    var $this = $(this);
+                    var $this_ul = $this.siblings('ul');
+
+                    var check = $this.hasClass('on');
+                    if (check) {
+                        $this.removeClass('on');
+                        $this_ul.stop(true, true).slideUp();
+                    } else {
+                        $depth1_btn.removeClass('on');
+                        $depth1.stop().slideUp();
+                        $this.addClass('on');
+                        $this_ul.stop(true, true).slideDown();
+                    }
+                });
+
+                /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+                $(window).resize(function() {
+                    $left_gnb.removeClass('on');
+                });
+            }
+
+            start(); // 시작 호출
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+            <div class="logo"><a href="index.html"><img src="images/logo.png" alt="로고"></a></div>
+            <div class="side">
+                <ul class="menu">
+                    <li><a href="sub1.html">삼다수의 탄생</a>
+                        <ul>
+                            <li><a href="sub1.html">청정한 제주 자연</a></li>
+                            <li><a href="sub2.html">제주의 용천수</a></li>
+                            <li><a href="sub1.html">삼다수의 원천지</a></li>
+                            <!--초기화-->
+                        </ul>
+                    </li>
+                    <li><a href="sub1.html">삼다수우수성연구</a>
+                        <ul>
+                            <li><a href="sub1.html">화산암반수</a></li>
+                            <li><a href="sub1.html">천연 정수기</a></li>
+                            <!--초기화-->
+                        </ul>
+                    </li>
+                    <li><a href="sub1.html">제주물의역사</a>
+                        <ul>
+                            <li><a href="sub1.html">물허벅시대</a></li>
+                            <li><a href="sub1.html">지하수개발시대</a></li>
+                            <li><a href="sub1.html">보전관리시대</a></li>
+                            <li><a href="sub1.html">브랜드시대</a></li>
+                            <!--초기화-->
+                        </ul>
+                    </li>
+                    <li><a href="sub1.html">수자원현황</a>
+                        <ul>
+                            <li><a href="sub1.html">제주 수문지질 특성</a></li>
+                            <li><a href="sub1.html">제주지하수 부존특성</a></li>
+                            <!--초기화-->
+                        </ul>
+                    </li>
+                    <li><a href="event.html">EVENT</a>
+                        <ul>
+                            <li><a href="event.html">진행중인 이벤트</a></li>
+                            <li><a href="event.html">종료된 이벤트</a></li>
+                            <li><a href="event.html">당첨자 발표</a></li>
+                            <!--초기화-->
+                        </ul>
+                    </li>
+                    <!--초기화-->
+                </ul>
+                <div class="m_menu"><img src="images/button.png"></div>
+                <nav class="left_gnbWrap">
+                    <a href="#" class="close"><img src="images/btn_fixClose.png"></a>
+                    <ul class="left_gnb">
+                        <li>
+                            <a href="#">삼다수의 탄생</a>
+                            <ul>
+                                <li><a href="sub1.html">청정한 제주 자연</a></li>
+                                <li><a href="sub2.html">제주의 용천수</a></li>
+                                <li><a href="#">삼다수의 원천지</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">삼다수우수성연구</a>
+                            <ul>
+                                <li><a href="#">화산암반수</a></li>
+                                <li><a href="#">천연정수기</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">제주물의역사</a>
+                            <ul>
+                                <li><a href="#">물허벅시대</a></li>
+                                <li><a href="#">지하수개발시대</a></li>
+                                <li><a href="#">보전관리시대</a></li>
+                                <li><a href="#">브랜드시대</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">수자원현황</a>
+                            <ul>
+                                <li><a href="#">제주 수문지질 특성</a></li>
+                                <li><a href="#">제주지하수 부존특성</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">EVENT</a>
+                            <ul>
+                                <li><a href="event.html">진행중인 이벤트</a></li>
+                                <li><a href="event.html">종료된 이벤트</a></li>
+                                <li><a href="event.html">당첨자 발표</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <!--초기화-->
+            </div>
+            <!--초기화-->
+        </header>
+        <!--서브2시작-->
+        <article id="subimg2">
+            <h1 class="hidden">서브이미지</h1>
+            <div class="flicker-example" data-block-text="false">
+
+                <ul>
+                    <li>
+                    </li>
+
+                    <li>
+                    </li>
+
+                    <li>
+                    </li>
+
+                    <li></li>
+                </ul>
+            </div>
+            <div class="sub_title">
+                <h2 class="animate__animated animate__fadeInDown">삼다수의 탄생</h2>
+                <h3 class="animate__animated animate__fadeInDown">유네스코가 지정한 세계자연유산의 물.</h3>
+                <h4 class="animate__animated animate__fadeInDown">유네스코가 지정한<br>세계자연유산의 물.</h4>
+                <ul class="sub_category animate__animated animate__fadeIn">
+                    <li><a href="sub1.html">청정한 제주 자연</a><span></span></li>
+                    <li><a href="sub2.html">제주의 용천수</a></li>
+                    <li>삼다수의 원천지</li>
+                    <!--초기화-->
+                </ul>
+            </div>
+        </article>
+        <main id="sub_contents2">
+            <section class="sub2_ex">
+                <div class="sub2_et">
+                    <h3>제주특별자치도의 지리적 위치</h3>
+                    <p><span>제주특별자치도</span>는 한반도의 남해상에 위치한 <span>화산도</span>로서 우리나라 남해안에서 보면 남서쪽으로 치우쳐져 있다.<br>제주특별자치도에서 북쪽으로 목포까지의 거리가 149㎞, 북동쪽으로 부산과의 거리는 302㎞이며 서울과는 469㎞ 떨어져 있다.</p>
+                    <p>제주특별자치도의 주변해역은 북쪽 한반도 남해안과 사이에 제주해협을 포함하는 남해가 있고,<br>
+                        남쪽으로는 동중국해가 있는데 제주특별자치도가 남해와 동중국해의 경계가 되고 있다.</p>
+                    <p>제주특별자치도의 지도를 거꾸로 해서 보면 한반도의 작은 섬인 제주특별자치도가<br>
+                        태평양을 향하는 우리나라의 <span>전진기지</span>가 되는 것을 알 수 있다.</p>
+                    <p>즉, 주변에 위치한 한국, 중국, 일본의 중앙부에 제주특별자치도가 위치하고 있어<br>
+                        예로부터 지정학적으로 매우 중요한 위치를 점하고 있는 곳이다.</p>
+                </div>
+                <div class="sub2_ei"><img src="images/images/%EC%82%BC%EB%8B%A4%EC%88%98_sub2_06.jpg" alt="한반도"></div>
+                <!--초기화-->
+            </section>
+            <section class="sub2_ex2">
+                <div class="sub2_ei2 animate__animated animate__fadeInLeft"><img src="images/images/%EC%82%BC%EB%8B%A4%EC%88%98_sub2_10.jpg" alt="제주"></div>
+                <div class="sub2_et2 animate__animated animate__fadeInRight">
+                    <p>제주특별자치도는 동경 126도08분 ~ 126도58분, 북위 33도06분 ~ 34도00분에 속한다.<br>
+                        제주특별자치도의 남단은 마라도로서 마라도는 우리나라의 최남단에 해당되며,<br>
+                        서단은 한경면 차귀도, 동단은 우도 연평리의 비양등대, 북단은 추자도의 시루여이다.</p>
+                    <p>2004년 통계에 의하면 제주특별자치도의 총면적은 1,848.2㎢로 전국의 1.86%에 지나지 않으며<br>
+                        419.95㎞의 해안선과 8개의 유인도, 55개의 무인도를 포함하고 있다.</p>
+                </div>
+                <!--초기화-->
+            </section>
+            <section class="sub2_img">
+                <h1 class="hidden">서브2이미지</h1>
+            </section>
+            <section class="sub2_ex3">
+                <div class="sub2_et3">
+                    <h3>제주도의 지질</h3>
+                    <p><span>제주도</span>는 동북동 방향으로 길쭉한 타원의 모양을 가지며,<br>
+                        신생대 후기(약 200만 또는 180만년)부터 역사시대까지 발생한 <span>화산분출에 의해 형성</span>되었다<br>
+                        (원종관, 1976; 박기화 외, 2000a).
+                    </p>
+                    <p>섬의 중앙에는 해발 1,950m의 한라산이 솟아있으며 다양한 크기와 형태 그리고<br>
+                        인을 지닌 368개의 오름(volcanic cones)들이 섬의 곳곳에 분포한다.</p>
+                    <p>제주도 전역에서 이루어진 시추자료에 따르면 제주도의 지하에는 최하부에 기반암이 분포하고,<br>
+                        그 상부에 U층과 서귀포층 그리고 용암류가 피복하는 형태로 구성되어 있다.</p>
+                </div>
+                <div class="sub2_ei3 animate__animated animate__fadeIn"><img src="images/images/%EC%82%BC%EB%8B%A4%EC%88%98_sub2_05.jpg" alt="제주도의 지질"></div>
+                <!--초기화-->
+            </section>
+            <section class="sub2_ex4">
+                <div class="sub2_et4">
+                    <h3>세계자연유산 제주</h3>
+                    <p class="sub2_e4t1">제주 세계자연유산인<span>『제주 화산섬과 용암동굴』</span>이<br>
+                        2007년 6월 27일 제 31차 세계유산위원회의에서<br>
+                        만장일치로 유네스코 세계자연유산으로 등재되었다.</p>
+
+                    <!--반응시 텍스트-->
+                    <p class="sub2_e4t2">제주 세계자연유산인<span>『제주 화산섬과 용암동굴』</span>이 2007년 6월 27일 제 31차 세계유산위원회의에서 만장일치로 유네스코 세계자연유산으로 등재되었다.</p>
+
+                    <p>이로써 제주도는 <span>대한민국의 첫 번째 세계자연유산</span>이 되었다.</p>
+                </div>
+                <div class="sub2_ei4">
+                    <div class="ei4_1 animate__animated animate__fadeInDown"><img src="images/images/%EC%82%BC%EB%8B%A4%EC%88%98_sub2_19.jpg" alt="세계유산"></div>
+                    <div class="ei4_2 animate__animated animate__fadeInUp"><img src="images/images/%EC%82%BC%EB%8B%A4%EC%88%98_sub2_21.jpg" alt="화산섬과 동굴">
+                    </div>
+                    <div class="ei4_3 animate__animated animate__fadeInUp"><img src="images/images/%EC%82%BC%EB%8B%A4%EC%88%98_sub2%EB%AA%A8%EB%B0%94%EC%9D%BC_07.jpg" alt="화산섬과 동굴">
+                    </div>
+                    <!--초기화-->
+                </div>
+                <!--초기화-->
+            </section>
+        </main>
+        <!--서브2끝-->
+        <footer id="footer">
+            <div class="ft">
+                <div class="footer_logo"><a href="index.html"><img src="images/f_logo.png" alt="푸터로고"></a></div>
+                <p class="ad">
+                    제주특별자치도 제주시 조천읍 남조로 1717-35
+                </p>
+                <p class="tel">대표전화 :(064)780-3399, (국번없이)1636 (제주개발공사 또는 삼다수를 말하세요) 팩스 :(064)784-5020</p>
+                <ul class="info">
+                    <li>개인정보처리방침</li>
+                    <li>저작권보호정책</li>
+                    <!--초기화-->
+                </ul>
+                <ul class="sns">
+                    <li><img src="images/facebook.png" alt="페이스북"></li>
+                    <li><img src="images/instagram.png" alt="인스타그램"></li>
+                    <!--초기화-->
+                </ul>
+                <p class="copyright">Copyrightⓒ 2018 제주특별자치도개발공사, All Rights Reserved.</p>
+            </div>
+        </footer>
+        <div class="top">
+            <img src="images/top_button.png" alt="top">
+        </div>
+
+    </div>
+</body>
+
+</html>
